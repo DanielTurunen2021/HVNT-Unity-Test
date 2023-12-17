@@ -297,6 +297,8 @@ GameObject:
   - component: {fileID: 1380383536}
   - component: {fileID: 1380383535}
   - component: {fileID: 1380383537}
+  - component: {fileID: 1380383539}
+  - component: {fileID: 1380383538}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -348,6 +350,33 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 5421289755052546121, guid: 2e72cb2a03fea1e4dacd777b79fc6ec2,
     type: 3}
   m_DetectionMode: -1
+--- !u!114 &1380383538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380383534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1613946563422b14596c59cf28e95c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeableGameObject: {fileID: 524842835090390728, guid: 738f50bcd4cc50c44bb16ac61510e38b,
+    type: 3}
+--- !u!114 &1380383539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380383534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RaycastPrefab: {fileID: 0}
 --- !u!1 &1599061369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dbf4fec52b32009af81e4334d3569139,
@@ -656,6 +685,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421289755052546160, guid: 2e72cb2a03fea1e4dacd777b79fc6ec2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421289755052546160, guid: 2e72cb2a03fea1e4dacd777b79fc6ec2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5421289755052546160, guid: 2e72cb2a03fea1e4dacd777b79fc6ec2,
         type: 3}
