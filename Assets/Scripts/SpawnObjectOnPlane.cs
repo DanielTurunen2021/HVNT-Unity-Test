@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR.ARFoundation;
@@ -11,7 +13,7 @@ public class SpawnObjectOnPlane : MonoBehaviour
     private GameObject _spawnedGameObject;
     private uint ChestCount = 0;
     [SerializeField] private uint maxObjects = 0;
-    private uint objectCount = 0;
+    [SerializeField] private GameObject ballToSpawn;
     
 
     [SerializeField] 
@@ -46,6 +48,7 @@ public class SpawnObjectOnPlane : MonoBehaviour
             return;
         }
 
+        
         if (_raycastManager.Raycast(touchposition, _raycastHits, TrackableType.PlaneWithinPolygon))
         {
             //if we touched the screen. store the first position.
@@ -53,18 +56,12 @@ public class SpawnObjectOnPlane : MonoBehaviour
 
           
             //Spawn an object at this location & add it to the list of tracked objects if the number of objets are less than 3.
-            if (objectCount < maxObjects)
+            if (_trackedObjects.Count < maxObjects)
             {
-                /*
-                _spawnedGameObject = Instantiate(placeableGameObject, hitpos.position, hitpos.rotation);
-                _trackedObjects.Add(_spawnedGameObject);
-                objectCount++;
-                */
-                
                 SpawnPrefab(hitpos);
             }
             
-            if (objectCount == maxObjects)
+            if (_trackedObjects.Count == maxObjects)
             {
                 if (ChestCount < 1)
                 {
@@ -72,9 +69,20 @@ public class SpawnObjectOnPlane : MonoBehaviour
                     anim.Play("Chest_Lid_anim");
                     ChestCount++;
                 }
+
+                if (ChestCount >= 1)
+                {
+                    _spawnedGameObject = Instantiate(ballToSpawn, _trackedObjects[0].transform.position,
+                        _trackedObjects[0].transform.rotation);
+                    Vector3 pos1 = _trackedObjects[0].transform.position;
+                    Vector3 pos2 = _trackedObjects[1].transform.position;
+                    Vector3 pos3 = _trackedObjects[2].transform.position;
+
+                    StartCoroutine(Lerp(_spawnedGameObject,pos1, pos2, pos3));
+                    
+                }
                 
             }
-            
         }
     }
     
@@ -97,6 +105,29 @@ public class SpawnObjectOnPlane : MonoBehaviour
     {
         _spawnedGameObject = Instantiate(placeableGameObject, hitpose.position, hitpose.rotation);
         _trackedObjects.Add(_spawnedGameObject);
-        objectCount++;
+    }
+
+    IEnumerator Lerp(GameObject objecToMove,Vector3 pos1, Vector3 pos2, Vector3 pos3)
+    {
+        while (ChestCount >0)
+        {
+            if (objecToMove.transform.position == pos1)
+            {
+                Vector3.Lerp(pos1, pos2, Time.deltaTime);
+            }
+                    
+            if (objecToMove.transform.position == pos2)
+            {
+                Vector3.Lerp(pos2, pos3, Time.deltaTime);
+            }
+
+            if (objecToMove.transform.position == pos3)
+            {
+                Vector3.Lerp(pos3, pos1, Time.deltaTime);
+            }
+
+        }
+
+        yield return null;
     }
 }
