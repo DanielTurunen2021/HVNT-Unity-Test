@@ -123,9 +123,7 @@ public class SpawnObjectOnPlane : MonoBehaviour
             {
                 Vector3.Lerp(pos3, pos1, Time.deltaTime);
             }
-
+            yield return null;
         }
-
-        yield return null;
     }
 }
